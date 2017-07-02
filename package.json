@@ -7,7 +7,7 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "ava --watch"
   },
   "repository": {
     "type": "git",
@@ -24,9 +24,12 @@
   },
   "homepage": "https://github.com/erikprogramador/busx#readme",
   "devDependencies": {
+    "ava": "^0.20.0",
     "eslint": "^4.1.1",
     "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-import": "^2.6.1",
     "eslint-plugin-promise": "^3.5.0",
-    "eslint-plugin-standard": "^3.0.1"
+    "eslint-plugin-standard": "^3.0.1",
+    "sinon": "^2.3.6"
   }
 }
