@@ -22,5 +22,11 @@
   "bugs": {
     "url": "https://github.com/erikprogramador/busx/issues"
   },
-  "homepage": "https://github.com/erikprogramador/busx#readme"
+  "homepage": "https://github.com/erikprogramador/busx#readme",
+  "devDependencies": {
+    "eslint": "^4.1.1",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1"
+  }
 }
