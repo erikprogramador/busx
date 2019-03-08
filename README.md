@@ -26,7 +26,7 @@ Create a new instance
 
   `bus.fire('event-name', data)`
 
-On this event the **data** parameter it's optional
+On the **fire** event the **data** parameter it's optional
 
 - (**all**) This method return all events registered on the instance
 
