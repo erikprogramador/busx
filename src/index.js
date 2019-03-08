@@ -4,7 +4,7 @@
  * @version 0.1.0
  */
 class Busx {
-  constructor () {
+  constructor() {
     this.handlers = []
   }
 
@@ -15,7 +15,7 @@ class Busx {
    * @param {any} handler
    * @memberof Busx
    */
-  listen (key, handler) {
+  listen(key, handler) {
     this.handlers.push({
       key,
       handler
@@ -29,7 +29,7 @@ class Busx {
    * @param {any} [data={}]
    * @memberof Busx
    */
-  fire (key, data = {}) {
+  fire(key, data = {}) {
     this.handlers
       .filter(handler => handler.key === key)
       .forEach(handler => handler.handler(data))
@@ -41,7 +41,7 @@ class Busx {
    * @returns
    * @memberof Busx
    */
-  all () {
+  all() {
     return this.handlers
   }
 }

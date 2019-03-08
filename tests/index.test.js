@@ -4,7 +4,7 @@ import Busx from '../src/index.js'
 
 let dispatcher
 
-test.beforeEach(t => dispatcher = new Busx)
+test.beforeEach(t => (dispatcher = new Busx()))
 
 test('it can add events to listen', t => {
   const handler = sinon.spy()
@@ -23,7 +23,6 @@ test('it can fire a event', t => {
 
   t.truthy(handler.calledOnce)
 })
-
 
 test('it can fire a event with data', t => {
   const handler = sinon.spy()
@@ -44,10 +43,10 @@ test('it can return all events registered', t => {
   dispatcher.listen('some-event', handler)
   dispatcher.listen('second-event', handler)
 
-  t.deepEqual(dispatcher.all(), [
-    { key: 'some-event', handler },
-    { key: 'second-event', handler }
-  ])
+    t.deepEqual(dispatcher.all(), [
+        { key: 'some-event', handler },
+        { key: 'second-event', handler }
+    ])
 })
 
 test('it can add multiples handlers to a event', t => {
