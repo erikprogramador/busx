@@ -7,8 +7,9 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "ava --watch",
-    "build": "babel --presets=env -d dist src",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "build": "babel --presets=@babel/env -d dist src",
     "prepublish": "npm run build"
   },
   "repository": {
@@ -26,14 +27,14 @@
   },
   "homepage": "https://github.com/erikprogramador/busx#readme",
   "devDependencies": {
-    "ava": "^1.3.0",
-    "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
-    "eslint": "^5.15.1",
-    "eslint-config-standard": "^12.0.0",
-    "eslint-plugin-import": "^2.16.0",
-    "eslint-plugin-promise": "^4.0.1",
-    "eslint-plugin-standard": "^4.0.0",
-    "sinon": "^7.2.7"
+    "@babel/cli": "^7.10.5",
+    "@babel/preset-env": "^7.11.0",
+    "babel-jest": "^26.2.2",
+    "eslint": "^7.6.0",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "jest": "^26.2.2"
   }
 }

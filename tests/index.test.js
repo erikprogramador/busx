@@ -1,73 +1,72 @@
-import test from 'ava'
-import sinon from 'sinon'
 import Busx from '../src/index.js'
 
-let dispatcher
+describe('BusX test suite', () => {
+  let dispatcher
+  beforeEach(() => (dispatcher = new Busx()))
 
-test.beforeEach(t => (dispatcher = new Busx()))
+  it('it can add events to listen', () => {
+    const handler = jest.fn()
 
-test('it can add events to listen', t => {
-  const handler = sinon.spy()
+    dispatcher.listen('some-event', handler)
 
-  dispatcher.listen('some-event', handler)
+    expect(handler).not.toHaveBeenCalled()
+  })
 
-  t.truthy(handler.notCalled)
-})
+  it('it can fire a event', () => {
+    const handler = jest.fn()
 
-test('it can fire a event', t => {
-  const handler = sinon.spy()
+    dispatcher.listen('some-event', handler)
 
-  dispatcher.listen('some-event', handler)
+    dispatcher.fire('some-event')
 
-  dispatcher.fire('some-event')
+    expect(handler).toHaveBeenCalledTimes(1)
+  })
 
-  t.truthy(handler.calledOnce)
-})
+  it('it can fire a event with data', () => {
+    const handler = jest.fn()
+    const data = {
+      username: 'admin',
+    }
 
-test('it can fire a event with data', t => {
-  const handler = sinon.spy()
-  const data = {
-    username: 'admin'
-  }
+    dispatcher.listen('some-event', handler)
 
-  dispatcher.listen('some-event', handler)
+    dispatcher.fire('some-event', data)
 
-  dispatcher.fire('some-event', data)
+    expect(handler).toHaveBeenCalledWith(data)
+  })
 
-  t.truthy(handler.withArgs(data).calledOnce)
-})
+  it('it can return all events registered', () => {
+    const handler = jest.fn()
 
-test('it can return all events registered', t => {
-  const handler = sinon.spy()
+    dispatcher.listen('some-event', handler)
+    dispatcher.listen('second-event', handler)
 
-  dispatcher.listen('some-event', handler)
-  dispatcher.listen('second-event', handler)
-
-    t.deepEqual(dispatcher.all(), [
-        { key: 'some-event', handler },
-        { key: 'second-event', handler }
+    expect(dispatcher.all()).toMatchObject([
+      { key: 'some-event', handler },
+      { key: 'second-event', handler },
     ])
-})
+  })
 
-test('it can add multiples handlers to a event', t => {
-  const handler = sinon.spy()
+  it('it can add multiples handlers to a event', () => {
+    const handler = jest.fn()
 
-  dispatcher.listen('some-event', handler)
-  dispatcher.listen('some-event', handler)
+    dispatcher.listen('some-event', handler)
+    dispatcher.listen('some-event', handler)
 
-  dispatcher.fire('some-event')
+    dispatcher.fire('some-event')
 
-  t.truthy(handler.calledTwice)
-})
+    expect(handler).toHaveBeenCalledTimes(2)
+  })
 
-test('it should only fire the handlers associate with the key', t => {
-  const handler = sinon.spy()
+  it('it should only fire the handlers associate with the key', () => {
+    const handler = jest.fn()
 
-  dispatcher.listen('some-event', handler)
-  dispatcher.listen('some-event', handler)
-  dispatcher.listen('different-event', handler)
+    dispatcher.listen('some-event', handler)
+    dispatcher.listen('some-event', handler)
+    dispatcher.listen('different-event', handler)
 
-  dispatcher.fire('some-event')
+    dispatcher.fire('some-event')
 
-  t.truthy(handler.calledTwice)
+    expect(handler).toHaveBeenCalledTimes(2)
+  })
 })
